@@ -1,17 +1,32 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+interface AnalysisResponse {
+	extracted_files: {
+		[protocol: string]: [string, number, string][];
+	};
+	vt_results: {
+		filename: string;
+		status: string;
+		score?: string;
+		vt_link?: string;
+		is_malicious?: boolean;
+	}[];
+}
+
 function App() {
-	const [file, setFile] = useState(null);
-	const [response, setResponse] = useState(null);
+	const [file, setFile] = useState<File | null>(null);
+	const [response, setResponse] = useState<AnalysisResponse | null>(null);
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	const handleFileChange = (event: any) => {
-		setFile(event.target.files[0]);
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files) {
+			setFile(event.target.files[0]);
+		}
 	};
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		if (!file) {
 			setError(true);
@@ -26,7 +41,7 @@ function App() {
 		formData.append('pcap', file);
 
 		try {
-			const result = await axios.post(
+			const result = await axios.post<AnalysisResponse>(
 				'https://pcapanalyserbackend.onrender.com/analyze',
 				formData,
 				{
@@ -53,11 +68,11 @@ function App() {
 							onChange={handleFileChange}
 							accept=".pcap"
 							className="mb-4 block w-full text-sm text-gray-500
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-full file:border-0
-            file:text-sm file:font-semibold
-            file:bg-blue-50 file:text-blue-700
-            hover:file:bg-blue-100"
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-full file:border-0
+              file:text-sm file:font-semibold
+              file:bg-blue-50 file:text-blue-700
+              hover:file:bg-blue-100"
 						/>
 						<button
 							type="submit"
@@ -79,18 +94,20 @@ function App() {
 							<h2 className="text-2xl font-bold mb-4">Analysis Results</h2>
 							<h3 className="text-xl font-semibold mb-2">Extracted Files</h3>
 							{Object.entries(response.extracted_files).map(
-								([protocol, files]) => (
+								([protocol, files]: [string, [string, number, string][]]) => (
 									<div key={protocol} className="mb-4">
 										<h4 className="text-lg font-medium text-gray-700">
 											{protocol}
 										</h4>
 										<ul className="list-disc pl-5">
-											{files.map((file, index) => (
-												<li key={index} className="text-sm text-gray-600">
-													{file[0]} - Size: {file[1].toFixed(2)} MB - Hash:{' '}
-													{file[2]}
-												</li>
-											))}
+											{files.map(
+												(file: [string, number, string], index: number) => (
+													<li key={index} className="text-sm text-gray-600">
+														{file[0]} - Size: {file[1].toFixed(2)} MB - Hash:{' '}
+														{file[2]}
+													</li>
+												)
+											)}
 										</ul>
 									</div>
 								)
