@@ -75,26 +75,67 @@ function App() {
 						<p className="text-blue-500 mb-4 text-center">Loading...</p>
 					)}
 					{response && (
-						<div className="bg-white p-6 rounded-lg shadow">
-							<h2 className="text-xl font-semibold mb-2">Analysis Result:</h2>
-							<p>Total Packets: {response.total_packets}</p>
-							<h3 className="text-lg font-semibold mt-4 mb-2">Protocols:</h3>
-							{Object.entries(response.protocols).map(([protocol, stats]) => (
-								<div key={protocol} className="mb-4 p-4 bg-gray-50 rounded">
-									<h4 className="font-semibold text-blue-600">{protocol}</h4>
-									<p>Packet Count: {stats.packet_count}</p>
-									<p>
-										Packet Percentage: {stats.packet_percentage.toFixed(2)}%
-									</p>
-									<p>Total MB: {stats.total_mb.toFixed(2)}</p>
-									<p>
-										Client to Server MB: {stats.client_to_server_mb.toFixed(2)}
-									</p>
-									<p>
-										Server to Client MB: {stats.server_to_client_mb.toFixed(2)}
-									</p>
-								</div>
-							))}
+						<div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+							<h2 className="text-2xl font-bold mb-4">Analysis Results</h2>
+							<h3 className="text-xl font-semibold mb-2">Extracted Files</h3>
+							{Object.entries(response.extracted_files).map(
+								([protocol, files]) => (
+									<div key={protocol} className="mb-4">
+										<h4 className="text-lg font-medium text-gray-700">
+											{protocol}
+										</h4>
+										<ul className="list-disc pl-5">
+											{files.map((file, index) => (
+												<li key={index} className="text-sm text-gray-600">
+													{file[0]} - Size: {file[1].toFixed(2)} MB - Hash:{' '}
+													{file[2]}
+												</li>
+											))}
+										</ul>
+									</div>
+								)
+							)}
+
+							<h3 className="text-xl font-semibold mb-2 mt-6">
+								VirusTotal Results
+							</h3>
+							<ul className="divide-y divide-gray-200">
+								{response.vt_results.map((result, index) => (
+									<li key={index} className="py-2">
+										<p className="text-sm font-medium text-gray-900">
+											{result.filename}
+										</p>
+										{result.status === 'unknown' ? (
+											<p className="text-sm text-gray-500">
+												Not found in VirusTotal database
+											</p>
+										) : (
+											<div>
+												<p className="text-sm text-gray-500">
+													Score: {result.score}
+												</p>
+												<a
+													href={result.vt_link}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="text-sm text-blue-500 hover:underline"
+												>
+													VirusTotal Link
+												</a>
+												<p
+													className={`text-sm ${
+														result.is_malicious
+															? 'text-red-500'
+															: 'text-green-500'
+													}`}
+												>
+													{result.is_malicious ? 'Malicious' : 'Not Malicious'}
+												</p>
+											</div>
+										)}
+									</li>
+								))}
+							</ul>
 						</div>
 					)}
 				</div>
