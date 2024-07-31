@@ -60,7 +60,7 @@ function App() {
 	return (
 		<div className="min-h-screen w-full flex justify-center items-center bg-gray-100">
 			<div className="w-full max-w-2xl p-8 flex justify-center items-center flex-col rounded-lg bg-orange-50 shadow-lg">
-				<h1 className="text-3xl font-bold mb-6">PCAP Analyzer</h1>
+				<h1 className="text-3xl font-bold mb-6 text-black">PCAP Analyzer</h1>
 				<div className="w-full flex justify-center items-center">
 					<form onSubmit={handleSubmit} className="w-full mb-6">
 						<input
@@ -91,13 +91,17 @@ function App() {
 					)}
 					{response && (
 						<div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-							<h2 className="text-2xl font-bold mb-4">Analysis Results</h2>
-							<h3 className="text-xl font-semibold mb-2">Extracted Files</h3>
+							<h2 className="text-2xl font-bold mb-4 text-black">
+								Analysis Results
+							</h2>
+							<h3 className="text-xl font-semibold mb-2 text-black">
+								Extracted Files
+							</h3>
 							{Object.entries(response.extracted_files).map(
 								([protocol, files]: [string, [string, number, string][]]) => (
 									<div key={protocol} className="mb-4">
 										<h4 className="text-lg font-medium text-gray-700">
-											{protocol}
+											{protocol === 'unknown' ? 'Unknown Protocol' : protocol}
 										</h4>
 										<ul className="list-disc pl-5">
 											{files.map(
@@ -113,7 +117,7 @@ function App() {
 								)
 							)}
 
-							<h3 className="text-xl font-semibold mb-2 mt-6">
+							<h3 className="text-xl font-semibold mb-2 mt-6 text-black">
 								VirusTotal Results
 							</h3>
 							<ul className="divide-y divide-gray-200">
