@@ -26,7 +26,7 @@ function Tft() {
     formData.append('operation', operation);
 
     try {
-      const response = await fetch('http://localhost:5000/analyze', {
+      const response = await fetch('https://ftf-tool-latest.onrender.com/analyze', {
         method: 'POST',
         body: formData,
       });
