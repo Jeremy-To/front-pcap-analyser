@@ -27,7 +27,7 @@ function Navbar() {
 						</Link>
 						<Link
 							to="/analysis"
-							className={`px-3 py-2 rounded-md text-sm font-medium ${
+							className={`ml-4 px-3 py-2 rounded-md text-sm font-medium ${
 								isActive('/analysis')
 									? 'bg-indigo-700 text-white'
 									: 'text-indigo-100 hover:bg-indigo-600 hover:text-white'
