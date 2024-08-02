@@ -15,7 +15,7 @@ function Navbar() {
 						</Link>
 					</div>
 					<div className="flex">
-							<Link
+						<Link
 							to="/Ftf"
 							className={`px-3 py-2 rounded-md text-sm font-medium ${
 								isActive('/Ftf')
@@ -23,7 +23,7 @@ function Navbar() {
 									: 'text-indigo-100 hover:bg-indigo-600 hover:text-white'
 							} transition duration-300 ease-in-out`}
 						>
-							Tft
+							Ftf
 						</Link>
 						<Link
 							to="/analysis"
