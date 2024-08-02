@@ -31,8 +31,12 @@ function Tft() {
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.ok) {
+        const data = await response.json();
+        setResult(data.output || data.error || 'No output received');
+      } else {
+        const errorData = await response.json();
+        setResult(errorData.error || `HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
