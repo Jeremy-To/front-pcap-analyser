@@ -45,6 +45,16 @@ function Navbar() {
 						>
 							Protocol
 						</Link>
+						<Link
+							to="/about"
+							className={`ml-4 px-3 py-2 rounded-md text-sm font-medium ${
+								isActive('/about')
+									? 'bg-indigo-700 text-white'
+									: 'text-indigo-100 hover:bg-indigo-600 hover:text-white'
+							} transition duration-300 ease-in-out`}
+						>
+							About
+						</Link>
 					</div>
 				</div>
 			</div>
