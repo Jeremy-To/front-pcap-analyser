@@ -1,4 +1,5 @@
 import React from 'react';
+import DocumentationPage from '../components/DocumentationHelper';
 
 const AboutPage: React.FC = () => {
 	return (
@@ -6,7 +7,6 @@ const AboutPage: React.FC = () => {
 			<h1 className="text-3xl font-bold mb-6 text-gray-800">
 				About Our Malware Analysis Tools
 			</h1>
-
 			<p className="mb-6 text-gray-600">
 				This repository contains a set of tools for analyzing binary files,
 				extracting useful information, and detecting certain characteristics.
@@ -15,7 +15,6 @@ const AboutPage: React.FC = () => {
 				header enumeration, programming language detection, section analysis,
 				packer detection, and YARA rule scanning.
 			</p>
-
 			<h2 className="text-2xl font-semibold mb-4 text-gray-800">Features</h2>
 			<ul className="list-disc pl-5 mb-6 text-gray-600">
 				<li>Extract Strings</li>
@@ -26,7 +25,6 @@ const AboutPage: React.FC = () => {
 				<li>Detect Packer</li>
 				<li>Search YARA Signatures</li>
 			</ul>
-
 			<h2 className="text-2xl font-semibold mb-4 text-gray-800">
 				Installation
 			</h2>
@@ -38,7 +36,6 @@ const AboutPage: React.FC = () => {
 			<pre className="bg-gray-100 p-3 rounded-md mb-4 overflow-x-auto">
 				<code className="text-sm">pip install -r requirements.txt</code>
 			</pre>
-
 			<p className="mb-4 text-gray-600">
 				Make sure you have the following tools installed and accessible in your
 				system's PATH:
@@ -53,18 +50,42 @@ const AboutPage: React.FC = () => {
 					malware research)
 				</li>
 			</ul>
-
 			<h2 className="text-2xl font-semibold mb-4 text-gray-800">Usage</h2>
 			<p className="mb-4 text-gray-600">
 				Each tool can be run using the{' '}
-				<code className="bg-gray-100 px-1 rounded">main.py</code> script. For
-				example, to extract strings:
+				<code className="bg-gray-100 px-1 rounded">main.py</code> script. Here
+				are some examples:
 			</p>
-			<pre className="bg-gray-100 p-3 rounded-md mb-6 overflow-x-auto">
+			<h3 className="text-xl font-semibold mb-2 text-gray-800">
+				Extract Strings
+			</h3>
+			<pre className="bg-gray-100 p-3 rounded-md mb-4 overflow-x-auto">
 				<code className="text-sm">
 					python main.py extract_strings &lt;file_path&gt; [output]
 				</code>
 			</pre>
+			<h3 className="text-xl font-semibold mb-2 text-gray-800">
+				Calculate Entropy
+			</h3>
+			<pre className="bg-gray-100 p-3 rounded-md mb-4 overflow-x-auto">
+				<code className="text-sm">
+					python main.py calculate_entropy &lt;file_path&gt; [output]
+				</code>
+			</pre>
+			<h3 className="text-xl font-semibold mb-2 text-gray-800">
+				Search YARA Signatures
+			</h3>
+			<pre className="bg-gray-100 p-3 rounded-md mb-6 overflow-x-auto">
+				<code className="text-sm">
+					python main.py search_yara_signatures &lt;file_path&gt;
+					&lt;rules_directory&gt; [output]
+				</code>
+			</pre>
+			<p className="mb-4 text-gray-600">
+				For more detailed usage instructions, please refer to the README file in
+				the repository.
+			</p>
+			<DocumentationPage />
 
 			<h2 className="text-2xl font-semibold mb-4 text-gray-800">
 				Contributing
