@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 
-function Tft() {
+function Ftf() {
   const [file, setFile] = useState<File | null>(null);
   const [analysisType, setAnalysisType] = useState<string>('malware');
   const [operation, setOperation] = useState<string>('strings');
@@ -120,4 +120,4 @@ function Tft() {
   );
 }
 
-export default Tft;
+export default Ftf;

@@ -11,14 +11,14 @@ function Navbar() {
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
 						<Link to="/" className="flex-shrink-0">
-							<h3 className="text-white">2600PCAP</h3>
+							<h3 className="text-white">2600Analyzer</h3>
 						</Link>
 					</div>
 					<div className="flex">
 							<Link
-							to="/tft"
+							to="/Ftf"
 							className={`px-3 py-2 rounded-md text-sm font-medium ${
-								isActive('/analysis')
+								isActive('/Ftf')
 									? 'bg-indigo-700 text-white'
 									: 'text-indigo-100 hover:bg-indigo-600 hover:text-white'
 							} transition duration-300 ease-in-out`}
